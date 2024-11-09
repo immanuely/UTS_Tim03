@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="CSS/Checkout.css">
+</head>
+
+<body>
+    <div class="header">
+        <div class="headerb">
+            <img alt="Logo" height="40" src="../Images/Logo.jpg" width="40" />
+            <a href="Homepages.html">
+                <h1 style="margin-left: 10px;">SUBA ' STORE</h1>
+            </a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="section-title">Jumlah Sepatu Pilihan Anda</div>
+
+        <!-- Container for all products -->
+        <div class="cart-container"></div>
+
+        <div class="footer">
+            <div class="left">
+                <input type="checkbox" id="select-all" /> Pilih Semua
+                &nbsp;<div class="numberProduct">0</div>
+                <button id="delete-selected">Hapus</button>
+            </div>
+            <div class="right">
+                <div class="total-price">Total (0 produk): Rp0</div>
+                <button>Pesan</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function loadCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartContainer = document.querySelector('.cart-container');
+            cartContainer.innerHTML = '';  // Clear existing content
+
+            cart.forEach((item, index) => {
+                const originalPrice = parseFloat(item.price.replace(/[^0-9.-]+/g, ""));
+                const discountedPrice = originalPrice * 0.8;
+
+                const productItem = document.createElement('div');
+                productItem.className = 'product-item';
+                productItem.innerHTML = `
+                    <div class="product-details">
+                        <input type="checkbox" class="item-checkbox" data-index="${index}" />
+                        <img alt="Product Image" src="${item.image}" height="80" width="80" />
+                        <div class="product-info">
+                            <div class="product-title">${item.name}</div>
+                            <div class="product-tags">
+                                <span>Bebas Refund</span>
+                                <span>Gratis Ongkir <span>(Khusus Binjai)</span></span>
+                                <span>Lokalnisme</span>
+                            </div>
+                            <div class="return-policy"><i class="fas fa-undo"></i> 100 Hari Pengembalian</div>
+                        </div>
+                    </div>
+                    <div class="original-price">Rp${originalPrice.toLocaleString("id-ID")}</div>
+                    <div class="product-price">
+                        <div class="product-quantity">
+                            <button>-</button>
+                            <input type="text" value="1" />
+                            <button>+</button>
+                        </div>
+                        <div>&nbsp;</div>
+                        <div class="discounted-price">Rp${discountedPrice.toLocaleString("id-ID")}</div>
+                    </div>
+                `;
+                cartContainer.appendChild(productItem);
+            });
+
+            updateProductCount();
+        }
+
+        function updateProductCount() {
+            const selectedCount = document.querySelectorAll('.item-checkbox:checked').length;
+            document.querySelector('.numberProduct').textContent = selectedCount;
+
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalPrice = Array.from(document.querySelectorAll('.item-checkbox:checked')).reduce((total, checkbox) => {
+                const index = parseInt(checkbox.dataset.index);
+                const price = parseFloat(cart[index].price.replace(/[^0-9.-]+/g, ""));
+                return total + price * 0.8; // Applying 20% discount
+            }, 0);
+
+            document.querySelector('.total-price').textContent = `Total (${selectedCount} produk): Rp${totalPrice.toLocaleString("id-ID")}`;
+        }
+
+        document.getElementById('select-all').addEventListener('change', function () {
+            const itemCheckboxes = document.querySelectorAll('.item-checkbox');
+            itemCheckboxes.forEach(checkbox => checkbox.checked = this.checked);
+            updateProductCount();
+        });
+
+        document.addEventListener('change', function (event) {
+            if (event.target.classList.contains('item-checkbox')) {
+                const allChecked = document.querySelectorAll('.item-checkbox:checked').length === document.querySelectorAll('.item-checkbox').length;
+                document.getElementById('select-all').checked = allChecked;
+                updateProductCount();
+            }
+        });
+
+        document.getElementById('delete-selected').addEventListener('click', function () {
+            const selectedIndexes = Array.from(document.querySelectorAll('.item-checkbox:checked')).map(checkbox => parseInt(checkbox.dataset.index));
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart = cart.filter((_, index) => !selectedIndexes.includes(index));
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            document.querySelectorAll('.item-checkbox').forEach(checkbox => checkbox.checked = false);
+            document.getElementById('select-all').checked = false;
+
+            loadCart();
+        });
+
+        window.onload = loadCart;
+    </script>
+</body>
+
+</html>
