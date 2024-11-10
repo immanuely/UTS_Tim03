@@ -1,0 +1,170 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+.header {
+    background-color: #fff;
+    color: #969696;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header img {
+    height: 60px;
+    width: 60px;
+}
+
+.headerb {
+    display: flex;
+    align-items: center;
+}
+
+.headerb a {
+    text-decoration: none;
+    color: #6e6e6e;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.content {
+    padding: 20px;
+}
+
+.content .section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.product-item {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ddd;
+}
+
+.product-item img {
+    height: 80px;
+    margin-right: 20px;
+}
+
+.product-details {
+    display: flex;
+    align-items: center;
+}
+
+.product-info {
+    margin-right: 20px;
+}
+
+.product-info .product-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.product-info .product-tags {
+    margin-top: 5px;
+}
+
+.product-info .product-tags span {
+    background-color: #00bfa5;
+    color: white;
+    padding: 2px 5px;
+    margin-right: 5px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+.product-info .return-policy {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+.product-price {
+    text-align: right;
+}
+
+.product-price .original-price {
+    text-decoration: line-through;
+    color: #999;
+}
+
+.product-price .discounted-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #4e4e4e;
+}
+
+.product-quantity {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.product-quantity input {
+    width: 30px;
+    text-align: center;
+    margin: 0 5px;
+}
+
+.footer {
+    background-color: white;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #ddd;
+}
+
+.footer .left {
+    display: flex;
+    align-items: center;
+}
+
+.footer .left input {
+    margin-right: 10px;
+}
+
+.footer .left button {
+    background-color: #ababab;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.footer .right {
+    text-align: center;
+}
+
+.footer .right .total-price {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #4e4e4e;
+}
+
+.footer .right button {
+    background-color: #ababab;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
