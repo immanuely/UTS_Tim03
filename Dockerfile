@@ -7,6 +7,7 @@ RUN rm -rf /usr/share/nginx/html/* && \
 
 # Salin file HTML utama
 COPY ./FrontEnd/Homepages.html /usr/share/nginx/html/index.html
+COPY ./FrontEnd/ /usr/share/nginx/html/
 
 # Salin file CSS
 COPY ./FrontEnd/CSS/ /usr/share/nginx/html/CSS/
@@ -15,7 +16,7 @@ COPY ./FrontEnd/CSS/ /usr/share/nginx/html/CSS/
 COPY ./Images/ /usr/share/nginx/html/Images/
 
 # Salin file JavaScript dari Backend (jika ada)
-COPY ./Backend/js/ /usr/share/nginx/html/js/
+COPY ./Backend/Homepage.js/usr/share/nginx/html/js/
 
 # Set izin (opsional, jika diperlukan)
 RUN chmod -R 755 /usr/share/nginx/html
