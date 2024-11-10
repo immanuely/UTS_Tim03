@@ -1,6 +1,5 @@
-name: CI/CD with Docker
+name: Docker CI/CD
 
-# Menjalankan workflow setiap kali ada push atau pull request ke branch utama
 on:
   push:
     branches:
@@ -14,38 +13,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout kode dari repositori
+      # Checkout repository code
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Setup Docker
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      # Build Docker image
-      - name: Build Docker image
-        run: docker build -t uts_tim03_image:latest .
-
-      # Push Docker image ke Docker Hub (opsional)
-      - name: Log in to Docker Hub
+      # Login to Docker Hub
+      - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Push Docker image
-        run: docker push uts_tim03_image:latest
+      # Build Docker image
+      - name: Build Docker Image
+        run: docker build -t immanuely/uts_dev_ops:latest .
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      # Checkout kode dari repositori
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      # Deploy aplikasi menggunakan Docker
-      - name: Deploy Docker container
-        run: |
-          docker run -d -p 80:80 --name uts_tim03_container uts_tim03_image:latest
+      # Push Docker image to Docker Hub
+      - name: Push Docker Image
+        run: docker push immanuelu/uts_dev_ops:latest
