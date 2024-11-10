@@ -4,6 +4,9 @@ FROM nginx:alpine
 # Hapus konten default nginx
 RUN rm -rf /usr/share/nginx/html/*
 
+# Membuat direktori js jika belum ada
+RUN mkdir -p /usr/share/nginx/html/js
+
 # Menyalin file-file yang diperlukan ke direktori default Nginx
 COPY ./FrontEnd/Homepages.html /usr/share/nginx/html/index.html
 COPY ./FrontEnd/CSS/ /usr/share/nginx/html/CSS/
