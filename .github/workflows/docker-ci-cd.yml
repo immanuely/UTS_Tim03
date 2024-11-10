@@ -24,7 +24,7 @@ jobs:
 
       # Build Docker image
       - name: Build Docker image
-        run: docker build -t your-image-name:latest .
+        run: docker build -t uts_tim03_image:latest .
 
       # Push Docker image ke Docker Hub (opsional)
       - name: Log in to Docker Hub
@@ -34,7 +34,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Push Docker image
-        run: docker push your-image-name:latest
+        run: docker push uts_tim03_image:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -48,4 +48,4 @@ jobs:
       # Deploy aplikasi menggunakan Docker
       - name: Deploy Docker container
         run: |
-          docker run -d -p 80:80 --name your-container-name your-image-name:latest
+          docker run -d -p 80:80 --name uts_tim03_container uts_tim03_image:latest
