@@ -1,0 +1,189 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
+.header img {
+    height: 60px;
+    width: 60px;
+}
+
+.headerb {
+    display: flex;
+    align-items: center;
+}
+
+.headerb a {
+    text-decoration: none;
+    color: #6e6e6e;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 10px;
+    color: #969696;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.header nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.header .search-cart {
+    display: flex;
+    align-items: center;
+}
+
+.header .search-cart input {
+    padding: 5px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.header .search-cart i {
+    margin: 0 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.sub-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #ddd;
+}
+
+.sub-header a {
+    text-decoration: none;
+    color: #000;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+.main-content {
+    padding: 20px;
+}
+
+.main-content h1 {
+    font-size: 36px;
+    margin: 0;
+}
+
+.main-content .filters {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.main-content .filters div {
+    position: relative;
+    margin-right: 10px;
+}
+
+.main-content .filters div select {
+    padding: 10px;
+    border: 3px solid #ddd;
+    border-radius: 3px;
+    background-color: #fff;
+    cursor: pointer;
+
+}
+
+.main-content .filters div select,
+.main-content .filters div button {
+    padding: 10px;
+    border: 3px solid #ddd;
+    border-radius: 3px;
+    background-color: #fff;
+    cursor: pointer;
+    width: 150px;
+    text-align: left;
+}
+
+.main-content .filters div .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.main-content .filters div:hover .dropdown-content {
+    display: block;
+}
+
+.main-content .filters div .dropdown-content label {
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.main-content .filters div .dropdown-content label:hover {
+    background-color: #f1f1f1;
+}
+
+.main-content .product-list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.main-content .product-list .product {
+    width: 23%;
+    margin-bottom: 20px;
+    text-align: center;
+    position: relative;
+}
+
+.main-content .product-list .product img {
+    width: 100%;
+    border: 3px solid #ddd;
+    border-radius: 3px;
+}
+
+.main-content .product-list .product .discount {
+    position: absolute;
+    background-color: #fff;
+    color: #000;
+    padding: 5px;
+    font-size: 12px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    margin: 10px;
+}
+
+.main-content .product-list .product .wishlist {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.main-content .product-list .product .namesproduct a {
+    text-decoration: none;
+    color: #000;
+}
