@@ -30,4 +30,4 @@ jobs:
 
       # Push Docker image to Docker Hub
       - name: Push Docker Image
-        run: docker push immanuelu/uts_dev_ops:latest
+        run: docker push immanuely/uts_dev_ops:latest
