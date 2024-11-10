@@ -1,20 +1,17 @@
-# Menggunakan image dasar Nginx
 FROM nginx:alpine
 
-# Hapus konten default nginx
-RUN rm -rf /usr/share/nginx/html/*
+# Hapus konten default nginx dan buat direktori yang diperlukan
+RUN rm -rf /usr/share/nginx/html/* && \
+    mkdir -p /usr/share/nginx/html/{CSS,Images,js}
 
-# Membuat direktori js jika belum ada
-RUN mkdir -p /usr/share/nginx/html/js
-
-# Menyalin file-file yang diperlukan ke direktori default Nginx
+# Salin file-file dari direktori proyek ke dalam container
 COPY ./FrontEnd/Homepages.html /usr/share/nginx/html/index.html
 COPY ./FrontEnd/CSS/ /usr/share/nginx/html/CSS/
 COPY ./Images/ /usr/share/nginx/html/Images/
-COPY ./Backend/js/ /usr/share/nginx/html/js/  # Menyalin JavaScript dari backend ke direktori js di Nginx
+COPY ./Backend/js/ /usr/share/nginx/html/js/
 
-# Set permissions
+# Set izin (opsional, jika diperlukan)
 RUN chmod -R 755 /usr/share/nginx/html
 
-# Nginx akan secara otomatis menjalankan website di port 80
+# Buka port 80 untuk akses web
 EXPOSE 80
