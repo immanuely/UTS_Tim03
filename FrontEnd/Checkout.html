@@ -33,16 +33,33 @@
             </div>
             <div class="right">
                 <div class="total-price">Total (0 produk): Rp0</div>
-                <button>Pesan</button>
+                <button id="order-button">Pesan</button>
             </div>
         </div>
     </div>
+
+    <!-- Modal for order confirmation -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Detail Pesanan</h2>
+            <div class="order-details"></div>
+            <div class="modal-total-price"></div>
+            <button id="confirm-order">Konfirmasi Pesanan</button>
+        </div>
+    </div>
+
+    <style>
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); }
+        .modal-content { background-color: #fff; margin: 10% auto; padding: 20px; width: 80%; max-width: 500px; position: relative; }
+        .close { position: absolute; top: 10px; right: 20px; cursor: pointer; font-size: 24px; }
+    </style>
 
     <script>
         function loadCart() {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             const cartContainer = document.querySelector('.cart-container');
-            cartContainer.innerHTML = '';  // Clear existing content
+            cartContainer.innerHTML = '';
 
             cart.forEach((item, index) => {
                 const originalPrice = parseFloat(item.price.replace(/[^0-9.-]+/g, ""));
@@ -89,7 +106,7 @@
             const totalPrice = Array.from(document.querySelectorAll('.item-checkbox:checked')).reduce((total, checkbox) => {
                 const index = parseInt(checkbox.dataset.index);
                 const price = parseFloat(cart[index].price.replace(/[^0-9.-]+/g, ""));
-                return total + price * 0.8; // Applying 20% discount
+                return total + price * 0.8;
             }, 0);
 
             document.querySelector('.total-price').textContent = `Total (${selectedCount} produk): Rp${totalPrice.toLocaleString("id-ID")}`;
@@ -121,6 +138,57 @@
 
             loadCart();
         });
+
+        // Show modal with order details
+        document.getElementById('order-button').addEventListener('click', function () {
+            const modal = document.getElementById("orderModal");
+            const orderDetails = document.querySelector('.order-details');
+            const modalTotalPrice = document.querySelector('.modal-total-price');
+
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const selectedItems = Array.from(document.querySelectorAll('.item-checkbox:checked')).map(checkbox => {
+                const index = parseInt(checkbox.dataset.index);
+                return cart[index];
+            });
+
+            if (selectedItems.length === 0) {
+                alert("Pilih setidaknya satu produk untuk dipesan.");
+                return;
+            }
+
+            let orderContent = '';
+            let totalOrderPrice = 0;
+
+            selectedItems.forEach(item => {
+                const originalPrice = parseFloat(item.price.replace(/[^0-9.-]+/g, ""));
+                const discountedPrice = originalPrice * 0.8;
+                totalOrderPrice += discountedPrice;
+
+                orderContent += `<div>${item.name} - Rp${discountedPrice.toLocaleString("id-ID")}</div>`;
+            });
+
+            orderDetails.innerHTML = orderContent;
+            modalTotalPrice.textContent = `Total: Rp${totalOrderPrice.toLocaleString("id-ID")}`;
+
+            modal.style.display = "block";
+        });
+
+        // Close modal
+        document.querySelector('.close').onclick = function () {
+            document.getElementById("orderModal").style.display = "none";
+        };
+
+        // Confirm order button
+        document.getElementById('confirm-order').addEventListener('click', function () {
+            alert("Pesanan Anda telah dikonfirmasi!");
+            document.getElementById("orderModal").style.display = "none";
+        });
+
+        window.onclick = function (event) {
+            if (event.target == document.getElementById("orderModal")) {
+                document.getElementById("orderModal").style.display = "none";
+            }
+        };
 
         window.onload = loadCart;
     </script>
